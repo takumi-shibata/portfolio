@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Portfolio</title>
+    <title>ブレイクZONE</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,34 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="row">
+      <div class="header">
+        <div class="text-center">
+          <h1 class="title">ブレイクZONE</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+          <div class="col-md-5 col-md-offset-4">
+            <ul class="nav navbar-nav">
+              <% if user_signed_in? %>
+                <li> 投稿一覧 </li>
+                <li> マイページ </li>
+                <li> ログアウト </li>
+              <% else %>
+                <li> <%= link_to "HOME", root_path %> </li>
+                <li> <%= link_to "ブレイクZONEについて", homes_about_path %> </li>
+                <li> <%= link_to "ログイン", new_user_session_path %> </li>
+                <li> <%= link_to "新規会員登録", new_user_registration_path %> </li>
+              <% end %>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <%= yield %>
+      <div class="footer">
+        ©ALL right recerved by Takumi Shibata
+      </div>
+    </div>
   </body>
 </html>
