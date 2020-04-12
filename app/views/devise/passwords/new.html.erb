@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+		<h2>パスワードをお忘れの方</h2>
+
+		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+		  <%= render "devise/shared/error_messages", resource: resource %>
+
+		  <div class="field">
+			  	<table>
+			  		<tr>
+					 <th><%= f.label :メールアドレス %></th>
+					 <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+					</tr>
+				</table>
+		  </div>
+
+		  <div class="actions">
+		     <button class="btn btn-danger btn-lg" type="submit">送信</button>
+		  </div>
+
+		  <%= link_to '=>ログインページに戻る', new_user_session_path %><br>
+		  <%= link_to '=>会員登録ページに戻る', new_user_registration_path %>
+		<% end %>
+	</div>
+</div>
