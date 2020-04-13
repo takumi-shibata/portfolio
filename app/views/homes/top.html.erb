@@ -1,38 +1,19 @@
 <body>
-	<div class="container">
-	  <div class="col-xs-7 col-xs-offset-5 about">
-		 <br>ようこそ、ブレイクZONEへ！
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>このサイトは、サイトになります。
-		 <br>1このサイトは、サイトになります。
-		 <br>2このサイトは、サイトになります。
-		 <br>3このサイトは、サイトになります。
-	  </div>
+  <div class="container">
+	  <div class="row">
+	  	  <div class="col-md-3"></div>
+	  	  <div class="col-md-6">
+			    <br>ようこそ、ブレイクZONEへ！！
+				<br>このサイトは、旅行して楽しかった場所や
+				<br>住んでいる地域・その周辺の良いと感じた場所を
+				<br>自由に投稿・大勢の人に共有できるアプリケーションサイトです。
+				<br><%= link_to "もっと詳しく＝＞", homes_about_path %><br>
 
-	  <div class="btn-wrapper">
-	  	  <%= link_to '新規会員登録',new_user_registration_path, class: "btn btn-success btn-block" %>
-		  <%= link_to 'ログイン',new_user_session_path, class: "btn btn-info btn-block" %>
+			  <div class="btn-wrapper">
+			  	 <br><%= link_to '新規会員登録', new_user_registration_path, class: "btn btn-success btn-block" %>
+				  <%= link_to 'ログイン', new_user_session_path, class: "btn btn-primary btn-block" %>
+			  </div>
+	      </div>
 	  </div>
-	</div>
+  </div>
 </body>

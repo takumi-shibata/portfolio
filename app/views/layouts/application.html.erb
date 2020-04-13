@@ -20,9 +20,9 @@
           <div class="col-md-5 col-md-offset-4">
             <ul class="nav navbar-nav">
               <% if user_signed_in? %>
-                <li> 投稿一覧 </li>
-                <li> マイページ </li>
-                <li> ログアウト </li>
+                <li> <%= link_to "投稿一覧", posts_path %> </li>
+                <li> <%= link_to "マイページ", user_path(current_user) %> </li>
+                <li> <%= link_to "ログアウト", destroy_user_session_path,method: :delete %> </li>
               <% else %>
                 <li> <%= link_to "HOME", root_path %> </li>
                 <li> <%= link_to "ブレイクZONEについて", homes_about_path %> </li>
