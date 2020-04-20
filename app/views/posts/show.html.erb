@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		タイトル<%= @post.title %><br>
+		サブタイトル<%= @post.subtitle %><br>
+		都道府県名<%= @post.region %><br>
+		市区町村・エリア名<%= @post.area %><br>
+		<%= attachment_image_tag @post, :image,size: '300x300', fallback: "no_image.jpg"  %><br>
+		<%= @post.body %><br>
+		<%= link_to "一覧画面に戻る", posts_path, class: "btn btn-primary btn-sm" %>
+		<%= link_to "編集", edit_post_path, class: "btn btn-success btn-sm" %>
+		<%= link_to "削除", post_path, method: :delete,data: {confirm: "本当に投稿を削除しますか？"},class: "btn btn-danger btn-sm" %>
+
+	  <div class="user-info">
+		  <%= attachment_image_tag @user, :profile_image, size: '100x100', fallback: "no_image.jpg" %>
+		  名前<%= @user.name %>
+		  自己紹介文<%= @user.introduction %>
+		    <%= link_to "この方の投稿をもっと閲覧する＝＞", user_path(@user.id), class: "btn btn-primary btn-sm" %>
+	  </div>
+	</div>
+</div>

@@ -1,8 +1,28 @@
 <div class="container">
   <div class="row">
-  	 <h2>新規投稿</h2>
-     <%= link_to "新しい投稿はこちらから＝＞", new_post_path %>
+  	 <div class="col-md-3">
+  	     <h2>新規投稿</h2>
+         <%= link_to "新しい投稿はこちらから＝＞", new_post_path %>
+     </div>
 
-     <h2>投稿一覧<h2>
-    </div>
+     <div class="col-md-4">
+	     <h2>投稿一覧<h2>
+	 </div>
+
+	 <% @posts.each do |post| %>
+	      <div class="col-md-9 col-md-offset-3">
+	          <table>
+	          	  <tr>
+		              <th><%= attachment_image_tag post, :image,size: '200x200', fallback: "no_image.jpg"  %></th><br>
+		              <td>タイトル<%= post.title %><br>
+		                  サブタイトル<%= post.subtitle %><br>
+		                  都道府県<%= post.region %><br>
+		                  市区町村・エリア<%= post.area %><br>
+		                  <%= link_to "詳しくはこちら＝＞", post_path(post.id) %>
+		              </td>
+		          </tr>
+	          </table>
+	      </div>
+	 <% end %>
+  </div>
 </div>

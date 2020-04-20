@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+
+	  <div class="side-bar col-xs-3">
+	  	  <div class="user_info">
+			 <h2>マイページ</h2>
+		  </div>
+
+		  <table class="table table-striped">
+              <tr>
+              	 <%= attachment_image_tag @user, :profile_image,size: '250x250',fallback: "no_image.jpg" %>
+              </tr>
+
+              <tr>
+              	 <th>名前</th>
+              	 <th><%= @user.name %>
+              </tr>
+
+              <tr>
+              	 <th>自己紹介文</th>
+              	 <th><%= @user.introduction %></th>
+              </tr>
+		  </table>
+		  <%= link_to "編集",  edit_user_path, class: "btn btn-success btn-block" %>
+
+		  <div class="new_field">
+		  	 <h2>新規投稿</h2>
+		  	 <%= link_to "新しい投稿はこちらから＝＞", new_post_path %>
+		  </div>
+	  </div>
+
+	  <div class="main col-xs-9">
+	  	  <div class="list">
+	  	     <h2>投稿一覧</h2>
+	      </div>
+
+	      <% @posts.each do |post| %>
+	          <table class="table table-striped">
+		          	  <tr>
+		                 <%= attachment_image_tag post, :image, size: '200x200', fallback: "no_image.jpg" %><br>
+		              	  <th>
+		              	  	  タイトル　　　　　　<%= post.title %><br>
+		              	 	  サブタイトル　　　　<%= post.subtitle %><br>
+		              	 	  都道府県名　　　　　<%= post.region %><br>
+                              市区町村・エリア名　<%= post.area %><br>
+                              <%= link_to "詳しくはこちら＝＞", post_path(post.id) %>
+		              	  </th>
+		              </tr>
+              </table>
+	      <% end %>
+	  </div>
+  </div>
+</div>

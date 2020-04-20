@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+  	  <h3>編集内容を入力してください</h3>
+
+  	  <div class="col-md-3"></div>
+  	  <div class="col-md-5">
+  	  	  <%= form_for(@post) do |f| %>
+  	  	      <div class="edit-field">
+			      <table class="edit-table">
+			      	  <tr>
+			      	  	 <th><%= f.label :タイトル %></th>
+			      	  	 <td><%= f.text_field :title %></td>
+			      	  </tr>
+
+			      	  <tr>
+			      	  	 <th><%= f.label :サブタイトル %></th>
+			      	  	 <td><%= f.text_field :subtitle %></td>
+			      	  </tr>
+
+			      	  <tr>
+			      	  	 <th><%= f.label :都道府県名 %></th>
+			      	  	 <td><%= f.text_field :region %></td>
+			      	  </tr>
+
+			      	  <tr>
+			      	  	 <th><%= f.label :市区町村・エリア名 %></th>
+			      	  	 <td><%= f.text_field :area %></td>
+			      	  </tr>
+
+			      	  <tr>
+			      	  	 <th><%= f.label :本文 %></th>
+			      	  	 <td><%= f.text_area :body %></td>
+			      	  </tr>
+
+			      	  <tr>
+			      	  	 <th><%= f.label :画像 %></th>
+			      	  	 <td><%= f.attachment_field :image %></td>
+			      	  </tr>
+			      </table>
+			  </div>
+
+			  <div class="actions">
+			  	 <button class="btn btn-primary btn-block" type="submit">更新する</button>
+			  </div>
+	      <% end %>
+
+          <div class="col-md-3"></div>
+	      <div class="col-md-7">
+		      <%= link_to "詳細画面に戻る", post_path(@post.id) %>
+			  <span> | </span>
+			  <%= link_to "一覧画面に戻る", posts_path %>
+		  </div>
+	  </div>
+  </div>
+</div>
