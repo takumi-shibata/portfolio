@@ -23,6 +23,10 @@
                 <li> <%= link_to "投稿一覧", posts_path %> </li>
                 <li> <%= link_to "マイページ", user_path(current_user) %> </li>
                 <li> <%= link_to "ログアウト", destroy_user_session_path,method: :delete %> </li>
+                <li><%= search_form_for @search, url: posts_path do |f| %>
+                      <%= f.text_field :region_cont, placeholder: '気になる都道府県名を入力', :size => "30*30" %>
+                      <%= f.submit ("検索する") %></li>
+                    <% end %>
               <% else %>
                 <li> <%= link_to "HOME", root_path %> </li>
                 <li> <%= link_to "ブレイクZONEについて", homes_about_path %> </li>
