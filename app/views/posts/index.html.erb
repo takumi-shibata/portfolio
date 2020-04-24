@@ -1,8 +1,23 @@
 <div class="container">
   <div class="row">
-  	 <div class="col-md-3">
-  	     <h2>新規投稿</h2>
-         <%= link_to "新しい投稿はこちらから＝＞", new_post_path %>
+
+  	 <div class="side-bar col-xs-4">
+  	 	  <div class="new_field">
+  	          <h2>新規投稿</h2>
+              <%= link_to "新しい投稿はこちらから＝＞", new_post_path %>
+          </div>
+
+          <div class="favorite_ranks">
+          	  <h2>いいね数ランキング</h2>
+          	  <% @all_ranks.each.with_index(1) do |post, i| %>
+          	      <span><h4>第<%= i %>位</h4></span>
+          	      投稿者<%= post.user.name %>さん
+          	      タイトル<%= post.title %>
+          	      <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+          	      <%= post.favorites.count %>いいね！
+          	      <%= link_to "詳しくはこちら＝＞", post_path(post.id) %>
+              <% end %>
+          </div>
      </div>
 
      <div class="col-md-4">
@@ -14,7 +29,8 @@
 	          <table>
 	          	  <tr>
 		              <th><%= attachment_image_tag post, :image,size: '200x200', fallback: "no_image.jpg"  %></th><br>
-		              <td>タイトル<%= post.title %><br>
+		              <td>投稿者<%= post.user.name %>さん<br>
+		              	  タイトル<%= post.title %><br>
 		                  サブタイトル<%= post.subtitle %><br>
 		                  都道府県<%= post.region %><br>
 		                  市区町村・エリア<%= post.area %><br>

@@ -6,6 +6,10 @@ class PostsController < ApplicationController
 
 	def index
 	  @posts = Post.page(params[:page]).reverse_order
+	  @user = current_user
+	  @all_ranks = Post.find(Favorite.group(:post_id).order(Arel.sql('count(post_id) desc')).limit(3).pluck(:post_id))
+	  #order/pluckの引数にSQL文字列を渡すと警告がでる→DEPRECATION WARNING
+	  #コンソールの警告の文末の通り、SQL文字列.orderの後にArel.sql()で対策
 	end
 
 	def show
