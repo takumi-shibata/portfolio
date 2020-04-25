@@ -1,56 +1,73 @@
 <div class="container">
   <div class="row">
 
+     <!--サイドバー-->
   	 <div class="side-bar col-xs-4">
   	 	  <div class="new_field">
   	          <h2>新規投稿</h2>
               <%= link_to "新しい投稿はこちらから＝＞", new_post_path %>
           </div>
-
+          
+          <!--いいねランキング-->
           <div class="favorite_ranks">
           	  <h2>いいね数ランキング</h2>
-          	  <% @all_ranks.each.with_index(1) do |post, i| %>
-          	      <span><h4>第<%= i %>位</h4></span>
-          	      投稿者<%= post.user.name %>さん
-          	      タイトル<%= post.title %>
-          	      <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
-          	      <%= post.favorites.count %>いいね！
-          	      <%= link_to "詳しくはこちら＝＞", post_path(post.id) %>
-              <% end %>
           </div>
+
+          <% @all_ranks.each.with_index(1) do |post, i| %>
+          	  <table class="table table-striped">
+          	  	  <tr>
+          	         <h4>第<%= i %>位</h4>
+          	      </tr>
+
+          	      <tr>
+          	         <th>投稿者：<%= post.user.name %>さん</th>
+          	      </tr>
+
+          	      <tr>
+          	         <th>タイトル：<%= post.title %></th>
+          	      </tr>
+
+          	      <tr>
+          	         <th><span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span> <%= post.favorites.count %>いいね！<%= link_to "詳しくはこちら＝＞", post_path(post.id) %></th>
+          	      </tr>
+          	  </table>
+          <% end %>
      </div>
 
-     <div class="col-md-4">
-	     <h2>投稿一覧<h2>
-	 </div>
+     <!--投稿一覧-->
+     <div class="main col-xs-8">
+          <div class="list">
+	          <h2>投稿一覧<h2>
+	      </div>
 
-	 <% @search_posts.each do |post| %>
-	      <div class="col-md-9 col-md-offset-3">
-	          <table>
-	          	  <tr>
-		              <th><%= attachment_image_tag post, :image,size: '200x200', fallback: "no_image.jpg"  %></th><br>
-		              <td>投稿者<%= post.user.name %>さん<br>
-		              	  タイトル<%= post.title %><br>
-		                  サブタイトル<%= post.subtitle %><br>
-		                  都道府県<%= post.region %><br>
-		                  市区町村・エリア<%= post.area %><br>
-		                  <% if post.favorited_by?(current_user) %>
+		  <% @search_posts.each do |post| %>
+		      <table class="table table-striped">
+		          <tr>
+			          <%= attachment_image_tag post, :image,size: '200x200', fallback: "no_image.jpg"  %><br>
+			          <th>
+			          	  投稿者　          <%= post.user.name %>さん<br>
+			              タイトル　　　　　　<%= post.title %><br>
+			              サブタイトル　　　　<%= post.subtitle %><br>
+			              都道府県名　　　　　<%= post.region %><br>
+			              市区町村・エリア名　<%= post.area %><br>
+			              <% if post.favorited_by?(current_user) %>
 							  <%= link_to post_favorites_path(post.id), method: :delete do %>
 							  <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
 							  <%= post.favorites.count %>いいね<br>
 							  <% end %>
 						  <% else %>
-							  <%= link_to post_favorites_path(post.id), method: :post do %><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+							  <%= link_to post_favorites_path(post.id), method: :post do %>
+							  <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
 							  <%= post.favorites.count %>いいね<br>
 							  <% end %>
 						  <% end %>
-		                  コメント数：<%= post.post_comments.count %><br>
-		                  <%= link_to "詳しくはこちら＝＞", post_path(post.id) %>
-		              </td>
-		          </tr>
-	          </table>
-	      </div>
-	 <% end %>
-	 <%= paginate @posts, class: "paginate" %>
+			              コメント数：<%= post.post_comments.count %><br>
+			              <%= link_to "詳しくはこちら＝＞", post_path(post.id) %>
+			          </th>
+			      </tr>
+		      </table>
+		  <% end %>
+		  <%= paginate @posts, class: "paginate" %>
+	 </div>
   </div>
 </div>
