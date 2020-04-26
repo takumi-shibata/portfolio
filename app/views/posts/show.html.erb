@@ -1,86 +1,124 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-3"></div>
-		<div class="col-xs-6">
-			タイトル<%= @post.title %><br>
-			サブタイトル<%= @post.subtitle %><br>
-			都道府県名<%= @post.region %><br>
-			市区町村・エリア名<%= @post.area %><br>
-			<%= attachment_image_tag @post, :image,size: '300x300', fallback: "no_image.jpg"  %><br>
-			<input id="address" type="textbox" value="Sydney, NSW">
-			<input type="button" value="Encode" onclick="codeAddress()">
-			<div id='map'></div>
+		<div class="col-xs-2"></div>
+		<div class="col-xs-8">
 
-			<style>
-			#map{
-			  height: 100px;
-			}
-			</style>
+		  <table class="table table-striped">
+		  	  <tr>
+				  <td>
+				  	  タイトル<%= @post.title %>
+					  サブタイトル<%= @post.subtitle %>
+					  都道府県名<%= @post.region %>
+					  市区町村・エリア名<%= @post.area %>
+				  </td>
+			 </tr>
+		  </table>
 
-			<script>
-			let map
-	        let geocoder
-			function initMap(){
-				geocoder = new google.maps.Geocoder()
+          <table class="table table-striped">
+			  <tr>
+				  <td><%= attachment_image_tag @post, :image,size: '300x300', fallback: "no_image.jpg"  %></td>
+				  <!--Google・MAP機能-->
+				  <td>
+				  	  <input id="address" type="textbox" value="">
+				      <input type="button" value="検索する" onclick="codeAddress()">
+				      <div id='map'></div>
+				  </td>
+		      </tr>
+		  </table>
+                    <!--Google・MAP機能-->
+					<style>
+					#map{
+					  height: 275px;
+					  width: 400px;
 
-			    map = new google.maps.Map(document.getElementById('map'), {
-				center: {lat: -34.397, lng: 150.644},
-				zoom: 8
-				});
-			}
-			function codeAddress(){
-			  let inputAddress = document.getElementById('address').value;
+					}
+					</style>
 
-			  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-			    if (status == 'OK') {
-			      map.setCenter(results[0].geometry.location);
+					<script>
+					let map
+			        let geocoder
+					function initMap(){
+						geocoder = new google.maps.Geocoder()
 
-			      var marker = new google.maps.Marker({
-			          map: map,
-			          position: results[0].geometry.location
-			      });
-			    } else {
-			      alert('Geocode was not successful for the following reason: ' + status);
-			    }
-			  });
-			}
-			</script>
+					    map = new google.maps.Map(document.getElementById('map'), {
+						center: {lat: -34.397, lng: 150.644},
+						zoom: 8
+						});
+					}
+					function codeAddress(){
+					  let inputAddress = document.getElementById('address').value;
 
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIyvTMta5XydDaSkV0AyK65hrMPPj-oE&callback=initMap" async defer></script>
+					  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+					    if (status == 'OK') {
+					      map.setCenter(results[0].geometry.location);
 
-			<%= @post.body %><br>
-			<% if @post.favorited_by?(current_user) %>
-			  <%= link_to post_favorites_path(@post), method: :delete do %>
-			  <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
-			  <%= @post.favorites.count %>いいね
-			  <% end %>
-			<% else %>
-			  <%= link_to post_favorites_path(@post), method: :post do %><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-			  <%= @post.favorites.count %>いいね
-			  <% end %>
-			<% end %>
-			コメント数：<%= @post.post_comments.count %>
-			<%= link_to "一覧画面に戻る", posts_path, class: "btn btn-primary btn-sm" %>
-			<%= link_to "編集", edit_post_path, class: "btn btn-success btn-sm" %>
-			<%= link_to "削除", post_path, method: :delete,data: {confirm: "本当に投稿を削除しますか？"},class: "btn btn-danger btn-sm" %>
+					      var marker = new google.maps.Marker({
+					          map: map,
+					          position: results[0].geometry.location
+					      });
+					    } else {
+					      alert('Geocode was not successful for the following reason: ' + status);
+					    }
+					  });
+					}
+					</script>
 
-		  <div class="user-info">
-			  <%= attachment_image_tag @user, :profile_image, size: '100x100', fallback: "no_image.jpg" %>
-			  名前<%= @user.name %>
-			  自己紹介文<%= @user.introduction %>
-			    <%= link_to "この方の投稿をもっと閲覧する＝＞", user_path(@user.id), class: "btn btn-primary btn-sm" %>
-		  </div>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcIyvTMta5XydDaSkV0AyK65hrMPPj-oE&callback=initMap" async defer></script>
 
+		  <table class="table table-striped">
+		  	  <tr>
+			      <th><%= @post.body %></th>
+			  </tr>
+		  </table>
+
+          <!--いいね数＋コメント数表示-->
+		  <table class="list">
+		  	  <tr>
+				  <% if @post.favorited_by?(current_user) %>
+					  <th><%= link_to post_favorites_path(@post), method: :delete do %>
+					  <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+					  <%= @post.favorites.count %>いいね</th>
+					  <% end %>
+				  <% else %>
+					  <th><%= link_to post_favorites_path(@post), method: :post do %><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+					  <%= @post.favorites.count %>いいね</th>
+					  <% end %>
+				  <% end %>
+					<th class="col-xs-3">コメント数：<%= @post.post_comments.count %></th>
+					<td><%= link_to "一覧画面に戻る", posts_path, class: "btn btn-primary btn-sm" %></td>
+					<td><%= link_to "投稿を編集する", edit_post_path, class: "btn btn-success btn-sm" %></td>
+					<td><%= link_to "投稿を削除する", post_path, method: :delete,data: {confirm: "本当に投稿を削除しますか？"},class: "btn btn-danger btn-sm" %></td>
+			  </tr>
+		  </table>
+
+          <!--投稿したユーザ情報-->
+		  <table class="user-info table table-striped">
+		  	  <tr>
+				  <td><%= attachment_image_tag @user, :profile_image, size: '80x80', fallback: "no_image.jpg" %></td>
+				  <th class="col-xs-12">
+				  	  投稿者：<%= @user.name %><br>
+                      自己紹介文：<%= @user.introduction %><br>
+                      <%= link_to "この方の投稿をもっと閲覧する＝＞", user_path(@user.id), class: "btn btn-primary btn-sm" %>
+                  </th>
+			  </tr>
+		  </table>
+
+          <!--コメントフォーム-->
 		  <%= form_for [@post, @post_comment] do |f| %>
 		      <%= f.text_area :comment, rows:'4', class: "form-control",placeholder: "コメントをここに入力" %>
-		      <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+		      <%= f.submit "送信する", class: "btn btn-default pull-right" %>
 		  <% end %>
 
+          <!--コメント表示-->
 		  <% @post.post_comments.each do |post_comment| %>
-		      <%= post_comment.user.name %>
-		      <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-		      <%= post_comment.comment %>
-		      <%= link_to "コメントを削除する", post_post_comment_path(@post, post_comment.id), method: :delete,data: {confirm: "本当に投稿を削除しますか？"},class: "btn btn-danger btn-sm" %>
+		      <table class="table table-striped">
+		      	  <tr>
+		             <td class="col-xs-3"><%= post_comment.user.name %></td>
+		             <td class="col-xs-3"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+		             <th class="col-xs-3"><%= post_comment.comment %></th>
+		             <td class="col-xs-3"><%= link_to "コメントを削除する", post_post_comment_path(@post, post_comment.id), method: :delete,data: {confirm: "本当に投稿を削除しますか？"},class: "btn btn-danger btn-sm" %></td>
+		          </tr>
+		      </table>
 		  <% end %>
 	  </div>
 	</div>

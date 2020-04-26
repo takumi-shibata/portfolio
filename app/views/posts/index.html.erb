@@ -43,13 +43,16 @@
 		  <% @search_posts.each do |post| %>
 		      <table class="table table-striped">
 		          <tr>
-			          <%= attachment_image_tag post, :image,size: '200x200', fallback: "no_image.jpg"  %><br>
-			          <th>
-			          	  投稿者　          <%= post.user.name %>さん<br>
+			          <td><%= attachment_image_tag post, :image,size: '100x100', fallback: "no_image.jpg"  %></td>
+			          <th class="col-xs-8">
 			              タイトル　　　　　　<%= post.title %><br>
 			              サブタイトル　　　　<%= post.subtitle %><br>
 			              都道府県名　　　　　<%= post.region %><br>
 			              市区町村・エリア名　<%= post.area %><br>
+			          </th>
+
+                      <!--いいね数＋コメント数表示-->
+			          <th class="col-xs-4">
 			              <% if post.favorited_by?(current_user) %>
 							  <%= link_to post_favorites_path(post.id), method: :delete do %>
 							  <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
@@ -62,11 +65,13 @@
 							  <% end %>
 						  <% end %>
 			              コメント数：<%= post.post_comments.count %><br>
+			              投稿者：<%= post.user.name %>さん<br>
 			              <%= link_to "詳しくはこちら＝＞", post_path(post.id) %>
 			          </th>
 			      </tr>
 		      </table>
 		  <% end %>
+		  <!--ページネーション-->
 		  <%= paginate @posts, class: "paginate" %>
 	 </div>
   </div>
