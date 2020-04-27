@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
 
+     <!--サイドバー-->
 	  <div class="side-bar col-xs-3">
 	  	  <div class="user_info">
 			 <h2>マイページ</h2>
@@ -29,6 +30,7 @@
 		  </div>
 	  </div>
 
+      <!--ユーザが投稿した一覧-->
 	  <div class="main col-xs-9">
 	  	  <div class="list">
 	  	     <h2>投稿一覧</h2>
@@ -37,12 +39,16 @@
 	      <% @posts.each do |post| %>
 	          <table class="table table-striped">
 		          	  <tr>
-		                 <%= attachment_image_tag post, :image, size: '200x200', fallback: "no_image.jpg" %><br>
-		              	  <th>
+		                  <td><%= attachment_image_tag post, :image, size: '100x100', fallback: "no_image.jpg" %></td>
+		              	  <th class="col-xs-8">
 		              	  	  タイトル　　　　　　<%= post.title %><br>
 		              	 	  サブタイトル　　　　<%= post.subtitle %><br>
 		              	 	  都道府県名　　　　　<%= post.region %><br>
                               市区町村・エリア名　<%= post.area %><br>
+                          </th>
+
+                          <!--いいね数＋コメント数表示-->
+                          <th class="col-xs-4">
                               <% if post.favorited_by?(current_user) %>
 							      <%= link_to post_favorites_path(post.id), method: :delete do %>
 							      <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
@@ -59,6 +65,7 @@
 		              </tr>
               </table>
 	      <% end %>
+	      <!--ページネーション-->
 	      <%= paginate @posts, class: "paginate" %>
 	  </div>
   </div>

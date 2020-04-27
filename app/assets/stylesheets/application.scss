@@ -17,32 +17,62 @@
  @import "bootstrap";
 
  .title {
-  color: gray;
+  color: #888888;
+  font-size: 50px;
+  font-family: 'arial black','HiraKakuPro-W6';
  }
 
  .footer {
   background-color: gray;
   color: white;
-  padding: 30px;
+  padding: 40px;
+  width: 100%;
   text-align: center;
+  position: absolute;
+  bottom: 0;
  }
 
- .image1 {
-  background-image: url(image1.jpg);
+ .session-title{
+   text-align: center;
  }
 
- .image2 {
-  background-image: url(image2.jpg);
+ .registration-info{
+   text-align: center;
  }
 
- .image3 {
-  background-image: url(image3.jpg);
+ .registration-title{
+   text-align: center;
  }
 
- .image4 {
-  background-image: url(image4.jpg);
+ .session-info{
+   text-align: center;
  }
 
- #container{
-  height: 300px;
+ .session-table{
+   border-collapse: separate;
+   border-spacing: 10px 10px;
  }
+
+ .registration-table {
+   border-collapse: separate;
+   border-spacing: 8px 8px;
+}
+
+ .password-title{
+   text-align: center;
+ }
+
+ .password-table{
+   border-collapse: separate;
+   border-spacing: 10px 10px;
+ }
+
+ body
+ ,#wrap{
+   min-height: 100vh;
+   position: relative;
+   padding-bottom: 120px;
+   box-sizing: border-box;
+ }
+
+

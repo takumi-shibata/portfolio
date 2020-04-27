@@ -5,13 +5,24 @@
 
 		  <table class="table table-striped">
 		  	  <tr>
-				  <td>
-				  	  タイトル<%= @post.title %>
-					  サブタイトル<%= @post.subtitle %>
-					  都道府県名<%= @post.region %>
-					  市区町村・エリア名<%= @post.area %>
-				  </td>
-			 </tr>
+				  <td class="col-xs-3">タイトル</td>
+				  <th><%= @post.title %></th>
+			  </tr>
+
+			  <tr>
+				  <td>サブタイトル</td>
+				  <th><%= @post.subtitle %></th>
+			  </tr>
+
+			  <tr>
+				  <td>都道府県名</td>
+				  <th><%= @post.region %></th>
+			  </tr>
+			  
+			  <tr>
+				  <td>市区町村・エリア名</td>
+				  <th><%= @post.area %></th>
+			  </tr>
 		  </table>
 
           <table class="table table-striped">
@@ -84,10 +95,10 @@
 					  <%= @post.favorites.count %>いいね</th>
 					  <% end %>
 				  <% end %>
-					<th class="col-xs-3">コメント数：<%= @post.post_comments.count %></th>
-					<td><%= link_to "一覧画面に戻る", posts_path, class: "btn btn-primary btn-sm" %></td>
-					<td><%= link_to "投稿を編集する", edit_post_path, class: "btn btn-success btn-sm" %></td>
-					<td><%= link_to "投稿を削除する", post_path, method: :delete,data: {confirm: "本当に投稿を削除しますか？"},class: "btn btn-danger btn-sm" %></td>
+					<th class="col-xs-4">コメント数：<%= @post.post_comments.count %></th>
+					<td class="col-xs-1"><%= link_to "一覧画面に戻る", posts_path, class: "btn btn-primary btn-sm" %></td>
+					<td class="col-xs-1"><%= link_to "投稿を編集する", edit_post_path, class: "btn btn-success btn-sm" %></td>
+					<td class="col-xs-1"><%= link_to "投稿を削除する", post_path, method: :delete,data: {confirm: "本当に投稿を削除しますか？"},class: "btn btn-danger btn-sm" %></td>
 			  </tr>
 		  </table>
 
