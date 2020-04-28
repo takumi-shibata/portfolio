@@ -30,6 +30,7 @@
 
 
 ## 設計書
+https://drive.google.com/file/d/1lGH1x1ZdV3c8AgXL6xHmVn9xz85k8fc6/view?usp=sharing
 
 
 ### 機能一覧
